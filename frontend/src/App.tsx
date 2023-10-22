@@ -4,6 +4,7 @@ import axios from "axios";
 import {Product} from "./Product.ts";
 import {Route, Routes} from "react-router-dom";
 import ProductsGallery from "./ProductsGallery.tsx";
+import StartPage from "./StartPage.tsx";
 
 function App() {
 
@@ -23,11 +24,9 @@ function App() {
     }
     return(
         <>
-            <h1>
-                My Products
-            </h1>
             <Routes>
-                <Route path={"/"} element={<ProductsGallery products={products} />}/>
+                <Route path={"/"} element={<StartPage/>} />
+                <Route path={"/products"} element={<ProductsGallery products={products} />}/>
             </Routes>
 
 
