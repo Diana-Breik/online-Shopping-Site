@@ -9,7 +9,6 @@ type Props = {
 export default function ProductsGallery(props: Props){
 
     return (
-        <>
         <div className="productsGalleryBackGround">
             <div className="topBar">
                 <Navbar />
@@ -23,6 +22,5 @@ export default function ProductsGallery(props: Props){
                 }
             </div>
         </div>
-        </>
     )
 }

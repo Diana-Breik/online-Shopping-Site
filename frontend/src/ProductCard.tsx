@@ -7,7 +7,6 @@ type Props = {
 export default function ProductCard(props: Props) {
 
     return (
-        <>
             <div className="productCard">
                {/* <h3>id: {props.product.id}</h3>*/}
                 <img className="productFoto" src={"./src/images/hintergrund.jpg"} alt=""/>
@@ -21,6 +20,5 @@ export default function ProductCard(props: Props) {
 
                </div>
             </div>
-        </>
     )
 }
