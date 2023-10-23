@@ -4,8 +4,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.verify;
 
@@ -57,4 +60,31 @@ class StoreServiceTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    void findProductById_WhenIdExist() {
+        //GIVEN
+        String id = "1";
+        Product product1 = new Product("1", "Product1", 600.10);
+
+        when(storeRepository.findById(id)).thenReturn(Optional.of(product1));
+
+        //WHEN
+        Product actual = storeService.getProductDetailsByID(id);
+
+        //THEN
+        Product expected = new Product("1", "Product1", 600.10);
+        verify(storeRepository).findById(id);
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    void findProductById_WhenIdNotExist(){
+        //GIVEN
+        String id ="5";
+
+        when(storeRepository.findById(id)).thenReturn(Optional.empty());
+        //WHEN
+        //THEN
+        assertThrows(NoSuchElementException.class, ()->storeService.getProductDetailsByID(id));
+    }
 }
