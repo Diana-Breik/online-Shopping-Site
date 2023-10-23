@@ -22,7 +22,7 @@ export default function ProductDetails(){
             })
     }
     return(
-        <div>
+        <div className="parentContainer">
             <div className="topBar">
                 <Navbar />
             </div>

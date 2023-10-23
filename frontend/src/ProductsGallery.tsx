@@ -9,18 +9,18 @@ type Props = {
 export default function ProductsGallery(props: Props){
 
     return (
-        <div className="productsGalleryBackGround">
-            <div className="topBar">
+           <div className="productsGalleryBackGround">
+             <div className="topBar">
                 <Navbar />
-            </div>
-            <h2 className="titleProductsGallery">All products</h2>
-            <div className="productsGallery">
+             </div>
+             <h2 className="titleProductsGallery">All products</h2>
+             <div className="productsGallery">
                 {
                     props.products.map( product =>
                         <ProductCard key={product.id} product={product}/>
                     )
                 }
-            </div>
-        </div>
+             </div>
+           </div>
     )
 }

@@ -10,19 +10,28 @@
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  justify-content: flex-start; /* Inhalt oben links ausrichten */
-  align-items: flex-start; /* Inhalt oben links ausrichten */
+  justify-content: flex-start;
+  align-items: flex-start;
 
 }
-.productsGalleryBackGround{
+.parentContainer{ /*die Oberfläche zu färben, die der sichtbare Bildschirm ist und nicht mehr*/
+  height: 100vh;
   position: sticky;
   box-shadow: inset 0 0 0 2000px rgba(0,0,0,0.2);
-  display: flex;
-  flex-direction: column;
   width: 100%;
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+}
+.productsGalleryBackGround{  /*die Möglichkeit zu färben, solange die Site Inhalt enthält*/
+  position: sticky;
+  box-shadow: inset 0 0 0 2000px rgba(0,0,0,0.2);
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
   justify-content: flex-start; /* Inhalt oben links ausrichten */
   align-items: flex-start; /* Inhalt oben links ausrichten */
 }
