@@ -1,9 +1,7 @@
 package com.example.backend;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,5 +14,10 @@ public class StoreController {
     @GetMapping
     public List<Product> getAllProducts(){
         return storeService.getAllProducts();
+    }
+
+    @GetMapping("/{id}")
+    public Product getProductDetailsByID(@PathVariable String id){
+        return storeService.getProductDetailsByID(id);
     }
 }
