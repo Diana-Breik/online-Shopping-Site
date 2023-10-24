@@ -1,5 +1,6 @@
 import {Product} from "./Product.ts";
 import './App.css'
+import {Link} from "react-router-dom";
 
 type Props = {
     product: Product
@@ -8,7 +9,7 @@ export default function ProductCard(props: Props) {
 
     return (
             <div className="productCard">
-               {/* <h3>id: {props.product.id}</h3>*/}
+                <Link to={`/products/${props.product.id}`}>
                 <img className="productFoto" src={"./src/images/hintergrund.jpg"} alt=""/>
                 <div className="productInfoBox">
                   <div className="productName">
@@ -17,8 +18,8 @@ export default function ProductCard(props: Props) {
                 <div className="price">
                     <p>{props.product.price}€</p>
                 </div>
-
                </div>
+                </Link>
             </div>
     )
 }

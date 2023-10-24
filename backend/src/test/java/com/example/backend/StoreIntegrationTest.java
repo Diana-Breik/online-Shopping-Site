@@ -63,4 +63,38 @@ class StoreIntegrationTest {
          """));
     }
 
+    @Test
+    @DirtiesContext
+    void getProductDetailsByID_ifFound() throws Exception {
+        //GIVEN
+        String id= "1";
+        Product product = new Product(id,"Product1",1000.10);
+        storeRepository.save(product);
+
+        //WHEN
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/products/"+ id))
+
+                //THEN
+                .andExpect(status().isOk())
+                .andExpect(content().json("""
+					{
+					"id": "1","name": "Product1","price":1000.10
+					}
+				"""));
+    }
+
+    @Test
+    @DirtiesContext
+    void getProductByID_ifNotFound_handleNoSuchElementException() throws Exception {
+        //GIVEN
+        String id= "5";
+
+        //WHEN
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/products/"+ id))
+
+                //THEN
+                .andExpect(status().isNotFound());
+    }
+
+
 }

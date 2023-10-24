@@ -1,12 +1,14 @@
-/*
+
 body {
-  margin: 0;
+ /* margin: 0;
   display: flex;
   place-items: center;
   min-width: 320px;
-  min-height: 100vh;
+  min-height: 100vh;*/
+  /*box-shadow: inset 0 0 0 2000px rgba(0,0,0,0.2);*/
+  background-color: #B6B6B4;/* #D1D0CE diese Farbe ist heller */
 }
-*/
+
 *{
   box-sizing: border-box;
   margin: 0;

@@ -10,19 +10,28 @@
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  justify-content: flex-start; /* Inhalt oben links ausrichten */
-  align-items: flex-start; /* Inhalt oben links ausrichten */
+  justify-content: flex-start;
+  align-items: flex-start;
 
 }
-.productsGalleryBackGround{
+.parentContainer{ /*die Oberfläche zu färben, die der sichtbare Bildschirm ist und nicht mehr*/
+  height: 100vh;
   position: sticky;
-  box-shadow: inset 0 0 0 2000px rgba(0,0,0,0.2);
-  display: flex;
-  flex-direction: column;
+  /*box-shadow: inset 0 0 0 2000px rgba(0,0,0,0.2);*/
   width: 100%;
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+}
+.productsGalleryBackGround{  /*die Möglichkeit zu färben, solange die Site Inhalt enthält*/
+  position: sticky;
+ /* box-shadow: inset 0 0 0 2000px rgba(0,0,0,0.2);*/
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
   justify-content: flex-start; /* Inhalt oben links ausrichten */
   align-items: flex-start; /* Inhalt oben links ausrichten */
 }
@@ -112,7 +121,7 @@
   border: 1px solid #2C3359;
   border-radius: 2px;
 }
-.productFoto{
+.productFoto{/*CARD*/
   max-width: 100%;
   height: auto;
 }
@@ -124,6 +133,7 @@
   font-weight: normal;
   font-size: .9rem;
   margin: 10px 0;
+  color: #1a1a1a;
 }
 .productPrice{
   display: flex;
@@ -134,10 +144,66 @@
 .price{
   font-size: 1.5rem;
   font-weight: bold;
+  color: #1a1a1a;
 }
-/*
-.bookDetails{
-  padding: 1em 2em;
-  margin: 1.5em 2em;
+.productDetails{
+  /*text-align: center;
   background-color: #fff;
-}*/
+  padding: 20px;
+  border: 1px solid black;
+  border-radius: 2px;
+  width: 60%;
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;*/
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 80%; /* Oder die gewünschte Breite */
+  flex: 1;
+  padding: 20px;
+}
+.productDetails img {
+/*  display: inline; !* Entfernt Lücken unterhalb des Bildes *!
+  height: 100%;
+  width: 100%;
+  margin-top: 0px;
+  padding-top: 0px;*/
+  border: 1px solid black;
+  border-radius: 2px;
+  max-width: 110%;
+  height: auto;
+  display: block;
+}
+.productText {
+  text-align: center;/* später mit der Einkaufsliste & Favoritliste soll das auf (left) gesetzt werden*/
+  padding: 20px;
+}
+.productText h3 {
+  font-size: 25px;
+  /*margin-top: 10px;*/
+}
+
+.productText p {
+  font-size: 20px;
+ /* margin-top: 5px;*/
+}
+.showMessage p{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
+  border-radius: 2px;
+  padding: 10px; /* Füge Padding hinzu, um den Text vom Rahmen abzusetzen */
+  width: 100%;
+  margin: 0 auto; /* Zentriere das Element horizontal auf der Seite */
+  font-size: 23px;
+}
+
