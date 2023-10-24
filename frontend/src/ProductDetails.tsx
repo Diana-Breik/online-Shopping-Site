@@ -3,6 +3,7 @@ import axios from "axios";
 import {Product} from "./Product.ts";
 import {useEffect, useState} from "react";
 import Navbar from "./Navbar.tsx";
+import './App.css'
 
 export default function ProductDetails(){
 
@@ -26,17 +27,23 @@ export default function ProductDetails(){
             <div className="topBar">
                 <Navbar />
             </div>
+            <div className="productDetails">
             {
                 product
                 ? <>
-                    <img className="productFoto" src={"./src/images/hintergrund.jpg"} alt=""/>
-                    <h3>{product.name}</h3><br/>
-                    {product.price && <p>Price        : <br/>{product.price}€</p>}
+                    <div className="productImage">
+                    <img src={"https://images.unsplash.com/photo-1522252234503-e356532cafd5?auto=format&fit=crop&q=80&w=2650&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"} alt="Product image"/>
+                    </div>
+                    <div className="productText">
+                    <h3>{product.price}€</h3><br/>
+                        <p>{product.name}</p>
+                    </div>
                 </>
-                : <>
+                : <div className="showMessage">
                     <p>Product not found</p>
-                </>
+                </div>
             }
+            </div>
         </div>
     )
 }
