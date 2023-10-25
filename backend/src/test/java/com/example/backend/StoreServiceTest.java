@@ -2,6 +2,7 @@ package com.example.backend;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -87,4 +88,24 @@ class StoreServiceTest {
         //THEN
         assertThrows(NoSuchElementException.class, ()->storeService.getProductDetailsByID(id));
     }
+
+  @Test
+  void addNewProduct() {
+      //GIVEN
+      ArgumentCaptor<Product> productArgumentCaptor = ArgumentCaptor.forClass(Product.class);
+
+      when(storeRepository.save(productArgumentCaptor.capture())).thenAnswer(invocationOnMock -> {
+          Product savedProduct = invocationOnMock.getArgument(0);
+          savedProduct = new Product("1",savedProduct.name(),savedProduct.price());
+          return savedProduct;
+              });
+
+      //WHEN
+      Product actual = storeService.saveNewProduct(new NewProduct("Product1", 600.10));
+
+      //THEN
+      verify(storeRepository).save(productArgumentCaptor.getValue());
+      Product expected = new Product("1", "Product1", 600.10);
+      assertEquals(expected, actual);
+  }
 }
