@@ -4,12 +4,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -95,6 +95,32 @@ class StoreIntegrationTest {
                 //THEN
                 .andExpect(status().isNotFound());
     }
+    @Test
+    @DirtiesContext
+    void whenAddNewProduct_saveAndReturnProductWithRandomID() throws Exception {
+        // Given
 
+        // When
+        mockMvc.perform(MockMvcRequestBuilders
+                        .post("/api/products")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+							{
+							"name": "Product1",
+							"price":1000.10
+							}
+						""")
+                )
+
+                // Then
+                .andExpect(status().isOk())
+                .andExpect(content().json("""
+					        {
+							"name": "Product1",
+							"price":1000.10
+							}
+				"""))
+                .andExpect(jsonPath("$.id").isString());
+    }
 
 }
