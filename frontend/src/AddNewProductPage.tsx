@@ -17,31 +17,19 @@ export default function AddNewProductPage(props: Props) {
     }
 
     function onPriceChange(event: ChangeEvent<HTMLInputElement>) {
-
-        /*const priceValue = event.target.value;
-        console.log(Number(priceValue))*/
-
             setEnteredPrice(event.target.value);
-
-        /* const priceValue = (event.target.valueAsNumber);
-         console.log(priceValue)
-         if(!isNaN(priceValue)){
-             setPrice(priceValue);
-         }
-
- */
     }
 
     function saveNewProduct(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        if(isNaN(Number(enteredPrice.replace(",",".")))){
+        if(isNaN(Number(Number(enteredPrice.replace(",",".")).toFixed(2)))){
            console.error("nicht gültig")
             return
         }
 
         const newProductForSave: NewProduct = {
             name: name,
-            price: Number(enteredPrice.replace(",","."))
+            price: Number(Number(enteredPrice.replace(",",".")).toFixed(2))
         }
         props.addNewProductMethod(newProductForSave);
         setName("");
