@@ -39,7 +39,7 @@
   display: flex;
   justify-content: flex-end; /* Navigation oben rechts ausrichten */
   align-items: flex-start;
-  position: absolute; /* Position auf absolut setzen */
+  position: absolute;
   top: 0; /* Oben ausrichten */
   right: 0; /* Rechts ausrichten */
   margin: 8px;
@@ -206,4 +206,49 @@
   margin: 0 auto; /* Zentriere das Element horizontal auf der Seite */
   font-size: 23px;
 }
+.addProductPage{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+.titleAddProduct{
+  text-align: center;
+  margin-bottom: 30px;
+}
+.addProductForm{
+  text-align: left;
+  border: 1px solid black;
+  background-color: snow;
+  border-radius: 10px;
+  padding: 10px;
+  height: 90%;
+  width: 200px;
+}
+.addProductForm input{
+  margin-top: 4px;
+  margin-bottom: 18px;
+  background-color: gainsboro;
+  border-radius: 6px;
+  height: 25px;
+  width: 175px;
+}
+.addProductPageButtons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 400px;
+  margin-top: 10px;
+}
 
+.cancelButtonForAddProductPage {
+  flex: 1;
+  margin-right: 5px;
+  background-color: gainsboro;
+}
+
+.saveButtonForAddProductPage {
+  flex: 1;
+  background-color: gainsboro;
+}

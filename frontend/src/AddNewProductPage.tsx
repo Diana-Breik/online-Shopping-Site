@@ -1,6 +1,7 @@
 import {ChangeEvent, FormEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {NewProduct} from "./Types.ts";
+import './App.css'
 
 type Props = {
     addNewProductMethod : (newProduct : NewProduct) => void
@@ -40,19 +41,24 @@ export default function AddNewProductPage(props: Props) {
 
 }
 return(
-    <>
-        <h3>Add a new Product to the store:</h3><br/>
+    <div className="addProductPage">
+
+        <h3 className="titleAddProduct">Add a new Product to the store:</h3><br/>
         <form onSubmit={saveNewProduct}>
-            <input value={name} required={true} onChange={onNameChange} placeholder="Name"/>
+            <div className="addProductForm">
+            <label>Product Name    :</label><br/><input value={name} required={true} onChange={onNameChange} placeholder=" Name"/>
             <br/>
-            <input value={enteredPrice} required={true} onChange={onPriceChange} placeholder="Price"/>
+            <label>Product Price   :</label><br/><input value={enteredPrice} required={true} onChange={onPriceChange} placeholder=" Price"/>
             <br/>
             {warningMessageToUser && <p>This Value is NOT a number</p>}
-            <br/><br/>
-            <button>Save</button>
-            <button onClick ={() => navigate("/")} type="button">Cancel</button>
+            <br/>
+            </div>
+            <div className="addProductPageButtons">
+            <button  className="cancelButtonForAddProductPage" onClick ={() => navigate("/")} type="button">Cancel</button>
+            <button className="saveButtonForAddProductPage">Save</button>
+            </div>
         </form>
 
-    </>
+    </div>
 )
 }
