@@ -9,7 +9,7 @@ export default function AddNewProductPage(props: Props) {
 
     const [name, setName] = useState<string>("");
     const [enteredPrice, setEnteredPrice] = useState<string>("");
-    /*let warningMessageToUser: boolean = false;*/
+    const [warningMessageToUser, setWarningMessageToUser] = useState(false);
     const navigate = useNavigate();
 
     function onNameChange(event: ChangeEvent<HTMLInputElement>) {
@@ -23,7 +23,8 @@ export default function AddNewProductPage(props: Props) {
     function saveNewProduct(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
         if(isNaN(Number(Number(enteredPrice.replace(",",".")).toFixed(2)))){
-           console.error("nicht gültig")
+            console.error("This Value is NOT a number");
+            setWarningMessageToUser(true);
             return
         }
 
@@ -34,6 +35,7 @@ export default function AddNewProductPage(props: Props) {
         props.addNewProductMethod(newProductForSave);
         setName("");
         setEnteredPrice("");
+        setWarningMessageToUser(false);
         navigate("/products");
 
 }
@@ -44,11 +46,13 @@ return(
             <input value={name} onChange={onNameChange} placeholder="Name"/>
             <br/>
             <input value={enteredPrice} onChange={onPriceChange} placeholder="Price"/>
+            <br/>
+            {warningMessageToUser && <p>This Value is NOT a number</p>}
             <br/><br/>
             <button>Save</button>
             <button onClick ={() => navigate("/")} type="button">Cancel</button>
         </form>
-       {/* {warningMessageToUser && <span>This Value is NOT a number</span>}*/}
+
     </>
 )
 }
