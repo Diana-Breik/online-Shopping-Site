@@ -9,7 +9,7 @@ export default function AddNewProductPage(props: Props) {
 
     const [name, setName] = useState<string>("");
     const [enteredPrice, setEnteredPrice] = useState<string>("");
-    let warningMessageToUser: boolean = false;
+    /*let warningMessageToUser: boolean = false;*/
     const navigate = useNavigate();
 
     function onNameChange(event: ChangeEvent<HTMLInputElement>) {
@@ -60,7 +60,7 @@ return(
             <button>Save</button>
             <button onClick ={() => navigate("/")} type="button">Cancel</button>
         </form>
-        {warningMessageToUser && <span>This Value is NOT a number</span>}
+       {/* {warningMessageToUser && <span>This Value is NOT a number</span>}*/}
     </>
 )
 }
