@@ -43,9 +43,9 @@ return(
     <>
         <h3>Add a new Product to the store:</h3><br/>
         <form onSubmit={saveNewProduct}>
-            <input value={name} onChange={onNameChange} placeholder="Name"/>
+            <input value={name} required={true} onChange={onNameChange} placeholder="Name"/>
             <br/>
-            <input value={enteredPrice} onChange={onPriceChange} placeholder="Price"/>
+            <input value={enteredPrice} required={true} onChange={onPriceChange} placeholder="Price"/>
             <br/>
             {warningMessageToUser && <p>This Value is NOT a number</p>}
             <br/><br/>
