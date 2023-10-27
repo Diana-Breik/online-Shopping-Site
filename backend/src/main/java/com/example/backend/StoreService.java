@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -24,5 +25,10 @@ public class StoreService {
         }else {
             throw new NoSuchElementException("This product does not exist");
         }
+    }
+
+    public Product saveNewProduct(NewProduct newProduct) {
+        Product product = new Product(UUID.randomUUID().toString(), newProduct.name(), newProduct.price());
+        return storeRepository.save(product);
     }
 }

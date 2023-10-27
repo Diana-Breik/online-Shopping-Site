@@ -22,6 +22,11 @@ public class StoreController {
     public Product getProductDetailsByID(@PathVariable String id){
         return storeService.getProductDetailsByID(id);
     }
+
+    @PostMapping
+    public Product addNewProduct(@RequestBody NewProduct newProduct){
+        return storeService.saveNewProduct(newProduct);
+    }
     @ExceptionHandler(NoSuchElementException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorMessage handleNoSuchElementException(NoSuchElementException exception){

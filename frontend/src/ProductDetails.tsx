@@ -1,6 +1,6 @@
 import {useParams} from "react-router-dom";
 import axios from "axios";
-import {Product} from "./Product.ts";
+import {Product} from "./Types.ts";
 import {useEffect, useState} from "react";
 import Navbar from "./Navbar.tsx";
 import './App.css'
