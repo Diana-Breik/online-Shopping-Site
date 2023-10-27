@@ -1,7 +1,7 @@
 import {ChangeEvent, FormEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {NewProduct} from "./Types.ts";
-import './App.css'
+import {NewProduct} from "../Types.ts";
+import '../App.css'
 
 type Props = {
     addNewProductMethod : (newProduct : NewProduct) => void

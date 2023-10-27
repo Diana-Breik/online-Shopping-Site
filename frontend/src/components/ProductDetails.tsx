@@ -1,9 +1,9 @@
 import {useParams} from "react-router-dom";
 import axios from "axios";
-import {Product} from "./Types.ts";
+import {Product} from "../Types.ts";
 import {useEffect, useState} from "react";
 import Navbar from "./Navbar.tsx";
-import './App.css'
+import '../App.css'
 
 export default function ProductDetails(){
 

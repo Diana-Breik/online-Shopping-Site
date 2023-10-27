@@ -1,5 +1,7 @@
 package com.example.backend;
 
+import com.example.backend.models.NewProduct;
+import com.example.backend.models.Product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

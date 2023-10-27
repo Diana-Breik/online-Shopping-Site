@@ -1,5 +1,5 @@
-import {Product} from "./Types.ts";
-import './App.css'
+import {Product} from "../Types.ts";
+import '../App.css'
 import {Link} from "react-router-dom";
 import bildForCard from '/hintergrund.jpg'
 

@@ -1,5 +1,5 @@
-import './App.css'
-import Image from "./images/HellerHintergrund.jpg";
+import '../App.css'
+import Image from "../images/HellerHintergrund.jpg";
 import Navbar from "./Navbar.tsx";
 export default function StartPage(){
 
