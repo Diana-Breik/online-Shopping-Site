@@ -46,11 +46,11 @@ return(
         <h3 className="titleAddProduct">Add a new Product to the store:</h3><br/>
         <form onSubmit={saveNewProduct}>
             <div className="addProductForm">
-            <label>Product Name    :</label><br/><input value={name} required={true} onChange={onNameChange} placeholder=" Name"/>
+            <label htmlFor="fld_Name">Product Name    :</label><br/><input id="fld_Name" value={name} required={true} onChange={onNameChange} placeholder=" Name"/>
             <br/>
-            <label>Product Price   :</label><br/>
+            <label htmlFor="feld_Price">Product Price   :</label><br/>
                 <div className="input-container">
-                <input value={enteredPrice} required={true} onChange={onPriceChange} placeholder=" Price"/>
+                <input id="feld_Price" value={enteredPrice} required={true} onChange={onPriceChange} placeholder=" Price"/>
                     <span className="input-unit">€</span>
                 </div>
             <br/>
