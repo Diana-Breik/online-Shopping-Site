@@ -298,6 +298,18 @@
   height: 25px;
   width: 175px;
 }
+.input-container { /*das Euro Zeichen mit dem Inhalt des Feldes einzubinden*/
+  position: relative;
+  display: inline-block;
+}
+
+.input-unit { /*das Euro Zeichen */
+  position: absolute;
+  top: 35%;
+  right: 10px; /* Anpassen, wie weit rechts der Text "Euro" stehen soll */
+  transform: translateY(-50%);
+  color: #555; /* Farbe des Einheitentexts */
+}
 .addProductPageButtons {
   display: flex;
   justify-content: space-between;

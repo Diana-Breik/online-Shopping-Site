@@ -48,7 +48,11 @@ return(
             <div className="addProductForm">
             <label>Product Name    :</label><br/><input value={name} required={true} onChange={onNameChange} placeholder=" Name"/>
             <br/>
-            <label>Product Price   :</label><br/><input value={enteredPrice} required={true} onChange={onPriceChange} placeholder=" Price"/>
+            <label>Product Price   :</label><br/>
+                <div className="input-container">
+                <input value={enteredPrice} required={true} onChange={onPriceChange} placeholder=" Price"/>
+                    <span className="input-unit">€</span>
+                </div>
             <br/>
             {warningMessageToUser && <p>This Value is NOT a number</p>}
             <br/>
