@@ -277,6 +277,23 @@
   justify-content: center;
   height: 100vh;
 }
+/*form{
+  background-color: snow;
+  border: 1px solid black;
+  border-radius: 10px;
+  width: 50%;
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+form input{
+  background-color: gainsboro;
+  border-radius: 6px;
+  outline: none;
+  padding: 5px 10px;
+
+}*/
 .titleAddProduct{
   text-align: center;
   margin-bottom: 30px;
@@ -295,6 +312,7 @@
   margin-bottom: 18px;
   background-color: gainsboro;
   border-radius: 6px;
+  outline: none;
   height: 25px;
   width: 175px;
 }
