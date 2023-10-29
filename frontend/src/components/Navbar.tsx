@@ -2,9 +2,9 @@ import '../App.css'
 import {Link} from "react-router-dom";
 import {useState} from "react";
 export default function Navbar(){
-    const [menuToggel,setManuToggel] = useState<boolean>(false);
+    const [menuToggel,setMenuToggel] = useState<boolean>(false);
     function toggelMenu(){
-        setManuToggel(!menuToggel);
+        setMenuToggel(!menuToggel);
     }
     return(
         <>
