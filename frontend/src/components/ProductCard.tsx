@@ -1,7 +1,7 @@
 import {Product} from "../Types.ts";
 import '../App.css'
 import {Link} from "react-router-dom";
-import bildForCard from '/hintergrund.jpg'
+import pictureForCard from '/hintergrund.jpg'
 
 type Props = {
     product: Product
@@ -11,7 +11,7 @@ export default function ProductCard(props: Props) {
     return (
             <div className="productCard">
                 <Link to={`/products/${props.product.id}`}>
-                <img className="productFoto" src={bildForCard} alt=""/>
+                <img className="productFoto" src={pictureForCard} alt=""/>
                 <div className="productInfoBox">
                   <div className="productName">
                     <p>{props.product.name}</p>
