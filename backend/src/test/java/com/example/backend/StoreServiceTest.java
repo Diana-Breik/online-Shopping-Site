@@ -123,4 +123,17 @@ class StoreServiceTest {
         // Then
         assertThrows(IllegalArgumentException.class, executable);
     }
+    @Test
+    void whenEditProductInfos_withNonExistentID_throwNoSuchElementException() {
+        // Given
+        when(storeRepository.findById("5")).thenReturn(Optional.empty());
+
+        // When
+        Executable executable = () -> storeService.editProductInformation("5", new Product("5","Product5", 600.10));
+
+        // Then
+        assertThrows(NoSuchElementException.class, executable);
+        verify(storeRepository).findById("5");/* Wenn ich zuerst verify aufrufen und die Methode nicht aufgerufen wurde, wird der Test fehlschlagen, und die assertThrows-Überprüfung wird nicht erreicht. */
+    }
+
 }
