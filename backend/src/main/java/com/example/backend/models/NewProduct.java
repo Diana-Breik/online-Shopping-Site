@@ -1,4 +1,4 @@
-package com.example.backend;
+package com.example.backend.models;
 
 public record NewProduct(String name, double price) {
 }

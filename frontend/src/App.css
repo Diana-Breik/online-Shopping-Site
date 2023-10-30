@@ -78,22 +78,84 @@
 .navbar {
   margin-right: 8px;
   margin-top: 5px;
- display: flex;
+  display: flex;
   justify-content: flex-start;
   align-items: flex-start;
   background: none;
   padding: 0;
   list-style: none;
 }
-
-.nav-item {
+.nav-menu{
+  display: flex;
+}
+.nav-item{
   display: inline-block;
   margin-right: 10px;
+  height: 100%;
+  list-style-type: none;
+  border-bottom: 2px solid unset;
 }
 
-.nav-item a {
-  text-decoration: none;
+.nav-item:hover{
+ /* text-decoration: none;*/
+  /*color: #1a1a1a;*/
+  border-bottom: 1px solid black;
+}
+.navText{
   color: #1a1a1a;
+  text-decoration: none;
+  font-family: sans-serif;
+}
+.toggle-button{
+  position: absolute;
+  top:10px;
+  right: 10px;
+  display: none; /*bar Button wird verschwunden, nur mit flex angezeigt*/
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 30px;
+  height: 23px;
+}
+.toggle-button .bar{
+  height: 5px;
+  margin-top: 2px;
+  width: 100%;
+  background-color: #1a1a1a;
+  border-radius: 100px;
+}
+@media(max-width: 750px){
+ /* .navbar{
+    display: none;
+    width: 100%;
+  }*/
+  .toggle-button{
+    display: flex;
+  }
+  .navbar{
+    display: none;
+    width: 100%;
+    margin-top: 12px;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: unset;
+  }
+  .navbar .nav-menu{
+    flex-direction: column;
+    width: 100%;
+  }
+  .navbar .nav-item{
+    text-align: left;
+  }
+  .navbar.active{
+    display: flex;
+  }
+  .content h1{
+    font-size: 64px;
+    margin-top: 15px;
+  }
+  .content p{
+    margin-top:45px;
+  }
 }
 .titleProductsGallery{
   margin-top: 30px;
@@ -119,11 +181,12 @@
   align-items: center;
   text-align: center;
   border: 1px solid #2C3359;
-  border-radius: 2px;
+  border-radius: 6px;
 }
 .productFoto{/*CARD*/
   max-width: 100%;
   height: auto;
+  border-radius: 4px;
 }
 .productInfoBox{
   margin-top: 10px;
@@ -177,10 +240,11 @@
   margin-top: 0px;
   padding-top: 0px;*/
   border: 1px solid black;
-  border-radius: 2px;
+  border-radius: 4px;
   max-width: 110%;
   height: auto;
   display: block;
+  margin-top: 60px;
 }
 .productText {
   text-align: center;/* später mit der Einkaufsliste & Favoritliste soll das auf (left) gesetzt werden*/
@@ -213,6 +277,23 @@
   justify-content: center;
   height: 100vh;
 }
+/*form{
+  background-color: snow;
+  border: 1px solid black;
+  border-radius: 10px;
+  width: 50%;
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+form input{
+  background-color: gainsboro;
+  border-radius: 6px;
+  outline: none;
+  padding: 5px 10px;
+
+}*/
 .titleAddProduct{
   text-align: center;
   margin-bottom: 30px;
@@ -231,8 +312,21 @@
   margin-bottom: 18px;
   background-color: gainsboro;
   border-radius: 6px;
+  outline: none;
   height: 25px;
   width: 175px;
+}
+.input-container { /*das Euro Zeichen mit dem Inhalt des Feldes einzubinden*/
+  position: relative;
+  display: inline-block;
+}
+
+.input-unit { /*das Euro Zeichen */
+  position: absolute;
+  top: 35%;
+  right: 10px; /* Anpassen, wie weit rechts der Text "Euro" stehen soll */
+  transform: translateY(-50%);
+  color: #555; /* Farbe des Einheitentexts */
 }
 .addProductPageButtons {
   display: flex;

@@ -1,7 +1,7 @@
-import {Product} from "./Types.ts";
+import {Product} from "../Types.ts";
 import ProductCard from "./ProductCard.tsx";
 import Navbar from "./Navbar.tsx";
-import './App.css'
+import '../App.css'
 
 type Props = {
     products: Product[]

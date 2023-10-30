@@ -1,12 +1,10 @@
-package com.example.backend;
-
-import lombok.With;
+package com.example.backend.models;
 
 public record Product(
         String id,
-        @With
+     /*   @With*/
         String name,
-        @With
+     /*   @With*/
         double price
 ) {
 }

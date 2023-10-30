@@ -3,10 +3,10 @@ import './App.css'
 import axios from "axios";
 import {NewProduct, Product} from "./Types.ts";
 import {Route, Routes, useNavigate} from "react-router-dom";
-import ProductsGallery from "./ProductsGallery.tsx";
-import StartPage from "./StartPage.tsx";
-import ProductDetails from "./ProductDetails.tsx";
-import AddNewProductPage from "./AddNewProductPage.tsx";
+import ProductsGallery from "./components/ProductsGallery.tsx";
+import StartPage from "./components/StartPage.tsx";
+import ProductDetails from "./components/ProductDetails.tsx";
+import AddNewProductPage from "./components/AddNewProductPage.tsx";
 
 function App() {
 
