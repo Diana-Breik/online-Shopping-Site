@@ -21,11 +21,11 @@ export default function Navbar(){
                 </li>
             </ul>
         </div>
-            <div onClick={toggelMenu} className="toggle-button">
+            <button type={"button"} onClick={toggelMenu} className="toggle-button">
                 <span className="bar"></span>
                 <span className="bar"></span>
                 <span className="bar"></span>
-            </div>
+            </button>
         </>
         )
 
