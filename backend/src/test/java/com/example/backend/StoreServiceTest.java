@@ -4,6 +4,7 @@ import com.example.backend.models.NewProduct;
 import com.example.backend.models.Product;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 import org.mockito.ArgumentCaptor;
 
 import java.util.List;
@@ -110,4 +111,16 @@ class StoreServiceTest {
       Product expected = new Product("1", "Product1", 600.10);
       assertEquals(expected, actual);
   }
+    @Test
+    void whenEditProductInfos_withDifferentIDs_throwIllegalArgumentException() {
+        // Given
+        String idInPath = "1";
+        String idInTheBodyOfTheModifiedProduct = "2";
+
+        // When
+        Executable executable = () -> storeService.editProductInformation(idInPath, new Product(idInTheBodyOfTheModifiedProduct, "Product1", 600.10));
+
+        // Then
+        assertThrows(IllegalArgumentException.class, executable);
+    }
 }
