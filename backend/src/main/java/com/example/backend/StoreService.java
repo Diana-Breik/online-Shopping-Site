@@ -33,4 +33,15 @@ public class StoreService {
         Product product = new Product(UUID.randomUUID().toString(), newProduct.name(), newProduct.price());
         return storeRepository.save(product);
     }
+
+    public Product editProductInformation(String id, Product productAfterEditing) {
+        if (!id.equals(productAfterEditing.id()))
+            throw new IllegalArgumentException("The given Id in the Path: (%s) and the Id of productAfterEditing: (%s) are different".formatted(id, productAfterEditing.id()));
+
+        Optional<Product> existingProductBeforeEditing = storeRepository.findById(id);
+        if (existingProductBeforeEditing.isEmpty())
+            throw new NoSuchElementException("This product that has this Id (%s) in the path does not exist".formatted(id));
+
+        return storeRepository.save(productAfterEditing);
+    }
 }

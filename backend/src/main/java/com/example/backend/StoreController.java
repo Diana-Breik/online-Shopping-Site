@@ -29,10 +29,22 @@ public class StoreController {
     public Product addNewProduct(@RequestBody NewProduct newProduct){
         return storeService.saveNewProduct(newProduct);
     }
+    @PutMapping("/{id}")
+    public Product editProductInfos(@PathVariable String id, @RequestBody Product productAfterEditing){
+        return storeService.editProductInformation(id,productAfterEditing);
+    }
+
     @ExceptionHandler(NoSuchElementException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorMessage handleNoSuchElementException(NoSuchElementException exception){
         String message = "NoSuchElementException: %s".formatted(exception.getMessage());
+        return new ErrorMessage(message);
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorMessage handleIllegalArgumentException(IllegalArgumentException exception){
+        String message = "IllegalArgumentException: %s".formatted(exception.getMessage());
         return new ErrorMessage(message);
     }
 }
