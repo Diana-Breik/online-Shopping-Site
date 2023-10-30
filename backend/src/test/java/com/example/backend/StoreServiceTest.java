@@ -136,4 +136,23 @@ class StoreServiceTest {
         verify(storeRepository).findById("5");/* Wenn ich zuerst verify aufrufen und die Methode nicht aufgerufen wurde, wird der Test fehlschlagen, und die assertThrows-Überprüfung wird nicht erreicht. */
     }
 
+    @Test
+    void whenEditProductInfos_withValidID_returnUpdatedProductAfterEditing() {
+        // Given
+        when(storeRepository.findById("1")).thenReturn(
+                Optional.of(new Product("1","Product1", 600.10))
+        );
+        when(storeRepository.save(new Product("1","Product1", 600.10))).thenReturn(
+                new Product("1","Product1", 600.10)
+        );
+
+        // When
+        Product actual = storeService.editProductInformation("1", new Product("1","Product1", 600.10));
+
+        // Then
+        verify(storeRepository).findById("1");
+        verify(storeRepository).save(new Product("1","Product1", 600.10));
+        Product expected = new Product("1","Product1", 600.10);
+        assertEquals(expected, actual);
+    }
 }
