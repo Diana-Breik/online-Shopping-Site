@@ -115,13 +115,15 @@
   justify-content: flex-start;
   width: 30px;
   height: 23px;
+  background-color: #B6B6B4;
+  padding: 0;
 }
 .toggle-button .bar{
   height: 5px;
-  margin-top: 2px;
   width: 100%;
   background-color: #1a1a1a;
   border-radius: 100px;
+  margin-top: 2px;
 }
 @media(max-width: 750px){
  /* .navbar{
