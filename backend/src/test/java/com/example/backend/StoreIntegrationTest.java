@@ -123,5 +123,24 @@ class StoreIntegrationTest {
 				"""))
                 .andExpect(jsonPath("$.id").isString());
     }
+    @Test
+    @DirtiesContext
+    void whenEditProductInfos_withDifferentIDs_returnBadRequest() throws Exception {
+        // Given
+        storeRepository.save(new Product("1","Product1",1000.10));
+        storeRepository.save(new Product("2","Product2",1000.10));
+        // When
+        mockMvc
+                .perform(MockMvcRequestBuilders
+                        .put("/api/products/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+							{"id": "2","name": "Product1","price":1000.20}
+						""")
+                )
+
+                // Then
+                .andExpect(status().isBadRequest());
+    }
 
 }
