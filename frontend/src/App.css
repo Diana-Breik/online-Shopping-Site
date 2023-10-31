@@ -348,3 +348,21 @@ form input{
   flex: 1;
   background-color: gainsboro;
 }
+.listButtons{
+  display: flex;
+  justify-content: flex-start;
+  align-items:flex-start;
+  gap: 10px;
+}
+.editButton{
+  display: flex;
+  justify-content: flex-start;
+  align-items:flex-start;
+  border: 2px solid #B6B6B4;
+  border-radius: 50%;
+  background-color: white;
+  cursor: pointer;
+  width:auto;
+  height: auto;
+  padding: 8px 14px;
+}
