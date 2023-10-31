@@ -142,5 +142,24 @@ class StoreIntegrationTest {
                 // Then
                 .andExpect(status().isBadRequest());
     }
+    @Test
+    @DirtiesContext
+    void whenEditProductInfos_withNonExistentID_returnNotFound() throws Exception {
+        // Given
+        storeRepository.save(new Product("1","Product1",1000.10));
+        storeRepository.save(new Product("2","Product2",1000.10));
 
+        // When
+        mockMvc
+                .perform(MockMvcRequestBuilders
+                        .put("/api/products/5")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+							{"id": "5","name": "Product5","price":1000.50}
+						""")
+                )
+
+                // Then
+                .andExpect(status().isNotFound());
+    }
 }
