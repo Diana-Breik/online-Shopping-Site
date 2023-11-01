@@ -2,16 +2,16 @@ import {useEffect, useState} from 'react'
 import './App.css'
 import axios from "axios";
 import {NewProduct, Product} from "./Types.ts";
-import {Route, Routes, useNavigate} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import ProductsGallery from "./components/ProductsGallery.tsx";
 import StartPage from "./components/StartPage.tsx";
 import ProductDetails from "./components/ProductDetails.tsx";
 import AddNewProductPage from "./components/AddNewProductPage.tsx";
+import FindProductForEditing from "./components/FindProductForEditing.tsx";
 
 function App() {
 
     const [products, setProducts] = useState<Product[]>([]);
-    const navigate = useNavigate();
     useEffect(loadAllProducts,[]);
 
     function loadAllProducts (){
@@ -36,7 +36,19 @@ function App() {
             .catch((error)=>{
                 console.error(error);
             })
-        navigate("/products");
+    }
+    function updateProductInfosCallbackMethod( productAfterEdit: Product ) {
+        axios
+            .put('/api/products/'+productAfterEdit.id, productAfterEdit)
+            .then(response => {
+                if (response.status != 200)
+                    throw new Error("Got wrong status on update product: " + response.status);
+                setProducts((prevState) => prevState.map((product) =>(product.id === response.data.id ? response.data : product)));
+                loadAllProducts();
+            })
+            .catch((error) => {
+                console.error(error);
+            });
     }
     return(
         <>
@@ -45,6 +57,7 @@ function App() {
                 <Route path={"/products"} element={<ProductsGallery products={products} />}/>
                 <Route path={"/products/:id"} element={<ProductDetails/>}/>
                 <Route path={"/products/add"} element={<AddNewProductPage addNewProductMethod={AddNewProductCallbackMethod}/>}/>
+                <Route path={"/products/:id/edit"} element={<FindProductForEditing products={products} updateMethod={updateProductInfosCallbackMethod} />}/>
             </Routes>
 
 
