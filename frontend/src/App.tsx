@@ -55,7 +55,7 @@ function App() {
             <Routes>
                 <Route path={"/"} element={<StartPage/>} />
                 <Route path={"/products"} element={<ProductsGallery products={products} />}/>
-                <Route path={"/products/:id"} element={<ProductDetails/>}/>
+                <Route path={"/products/:id"} element={<ProductDetails products={products}/>}/>
                 <Route path={"/products/add"} element={<AddNewProductPage addNewProductMethod={AddNewProductCallbackMethod}/>}/>
                 <Route path={"/products/:id/edit"} element={<FindProductForEditing products={products} updateMethod={updateProductInfosCallbackMethod} />}/>
             </Routes>
