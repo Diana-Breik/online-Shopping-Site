@@ -12,7 +12,7 @@ export default function ProductCard(props: Props) {
 
 
     function navigateWhenClickEdit ()  {
-        navigate('/');
+        navigate("/products/"+props.product.id+"/edit");
     }
 
     return (
