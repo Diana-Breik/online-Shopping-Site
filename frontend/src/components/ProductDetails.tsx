@@ -1,27 +1,16 @@
 import {useParams} from "react-router-dom";
-import axios from "axios";
 import {Product} from "../Types.ts";
-import {useEffect, useState} from "react";
 import Navbar from "./Navbar.tsx";
 import '../App.css'
 
-export default function ProductDetails(){
+type Props = {
+    products: Product[]
+}
+export default function ProductDetails(props : Props){
 
-    const urlParams=useParams()
+    const urlParams=useParams();
+    const filteredProduct = props.products.find(product => product.id === urlParams.id);
 
-    const [product, setProduct] = useState<Product>();
-    useEffect(loadProduct, [urlParams.id]);
-    function loadProduct (){
-        axios.get("/api/products/"+ urlParams.id)
-            .then((response) => {
-                if (response.status!==200)
-                    throw new Error("Get wrong response status, when loading the product: "+response.status);
-                setProduct(response.data)
-            })
-            .catch((error)=>{
-                console.error(error);
-            })
-    }
     return(
         <div className="parentContainer">
             <div className="topBar">
@@ -29,14 +18,14 @@ export default function ProductDetails(){
             </div>
             <div className="productDetails">
             {
-                product
+                filteredProduct
                 ? <>
                     <div className="productImage">
                     <img src={"https://images.unsplash.com/photo-1522252234503-e356532cafd5?auto=format&fit=crop&q=80&w=2650&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"} alt="Product image"/>
                     </div>
                     <div className="productText">
-                    <h3>{product.price}€</h3><br/>
-                        <p>{product.name}</p>
+                    <h3>{filteredProduct.price}€</h3><br/>
+                        <p>{filteredProduct.name}</p>
                     </div>
                 </>
                 : <div className="showMessage">
