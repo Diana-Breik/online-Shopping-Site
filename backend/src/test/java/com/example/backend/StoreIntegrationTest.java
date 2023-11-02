@@ -186,4 +186,17 @@ class StoreIntegrationTest {
 					{"id": "1","name": "Product1","price":1000.99}
 				"""));
     }
+
+    @Test
+    @DirtiesContext
+    void deleteProduct() throws Exception {
+        // Given
+        storeRepository.save(new Product("1","Product1",1000.10));
+
+        // When
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/products/1"))
+
+                // Then
+                .andExpect(status().isOk());
+    }
 }
