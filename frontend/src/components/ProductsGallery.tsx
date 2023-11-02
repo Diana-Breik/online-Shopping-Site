@@ -5,6 +5,7 @@ import '../App.css'
 
 type Props = {
     products: Product[]
+    deleteProductMethod: (id : string)=> void
 }
 export default function ProductsGallery(props: Props){
 
@@ -17,7 +18,7 @@ export default function ProductsGallery(props: Props){
              <div className="productsGallery">
                 {
                     props.products.map( product =>
-                        <ProductCard key={product.id} product={product}/>
+                        <ProductCard key={product.id} product={product} deleteProductMethod={props.deleteProductMethod}/>
                     )
                 }
              </div>
