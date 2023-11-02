@@ -44,4 +44,8 @@ public class StoreService {
 
         return storeRepository.save(productAfterEditing);
     }
+
+    public void deleteProductFromTheStore(String id) {
+        storeRepository.deleteById(id);
+    }
 }
