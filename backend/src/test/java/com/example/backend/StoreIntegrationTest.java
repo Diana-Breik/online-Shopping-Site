@@ -123,5 +123,67 @@ class StoreIntegrationTest {
 				"""))
                 .andExpect(jsonPath("$.id").isString());
     }
+    @Test
+    @DirtiesContext
+    void whenEditProductInfos_withDifferentIDs_returnBadRequest() throws Exception {
+        // Given
+        storeRepository.save(new Product("1","Product1",1000.10));
+        storeRepository.save(new Product("2","Product2",1000.10));
+        // When
+        mockMvc
+                .perform(MockMvcRequestBuilders
+                        .put("/api/products/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+							{"id": "2","name": "Product1","price":1000.20}
+						""")
+                )
 
+                // Then
+                .andExpect(status().isBadRequest());
+    }
+    @Test
+    @DirtiesContext
+    void whenEditProductInfos_withNonExistentID_returnNotFound() throws Exception {
+        // Given
+        storeRepository.save(new Product("1","Product1",1000.10));
+        storeRepository.save(new Product("2","Product2",1000.10));
+        // When
+        mockMvc
+                .perform(MockMvcRequestBuilders
+                        .put("/api/products/5")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+							{"id": "5","name": "Product5","price":1000.50}
+						""")
+                )
+
+                // Then
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    @DirtiesContext
+    void whenEditProductInfos_withValidID_returnUpdatedProductAfterEditing() throws Exception {
+        // Given
+        storeRepository.save(new Product("1","Product1",1000.10));
+        storeRepository.save(new Product("2","Product2",1000.20));
+        storeRepository.save(new Product("3","Product3",1000.30));
+        storeRepository.save(new Product("4","Product4",1000.40));
+        // When
+        mockMvc
+                .perform(MockMvcRequestBuilders
+                        .put("/api/products/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+							{"id": "1","name": "Product1","price":1000.99}
+						""")
+                )
+
+                // Then
+                .andExpect(status().isOk())
+                .andExpect(content().json("""
+					{"id": "1","name": "Product1","price":1000.99}
+				"""));
+    }
 }

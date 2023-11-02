@@ -4,6 +4,7 @@ import com.example.backend.models.NewProduct;
 import com.example.backend.models.Product;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 import org.mockito.ArgumentCaptor;
 
 import java.util.List;
@@ -110,4 +111,48 @@ class StoreServiceTest {
       Product expected = new Product("1", "Product1", 600.10);
       assertEquals(expected, actual);
   }
+    @Test
+    void whenEditProductInfos_withDifferentIDs_throwIllegalArgumentException() {
+        // Given
+        String idInPath = "1";
+        String idInTheBodyOfTheModifiedProduct = "2";
+
+        // When
+        Executable executable = () -> storeService.editProductInformation(idInPath, new Product(idInTheBodyOfTheModifiedProduct, "Product1", 600.10));
+
+        // Then
+        assertThrows(IllegalArgumentException.class, executable);
+    }
+    @Test
+    void whenEditProductInfos_withNonExistentID_throwNoSuchElementException() {
+        // Given
+        when(storeRepository.findById("5")).thenReturn(Optional.empty());
+
+        // When
+        Executable executable = () -> storeService.editProductInformation("5", new Product("5","Product5", 600.10));
+
+        // Then
+        assertThrows(NoSuchElementException.class, executable);
+        verify(storeRepository).findById("5");/* Wenn ich zuerst verify aufrufen und die Methode nicht aufgerufen wurde, wird der Test fehlschlagen, und die assertThrows-Überprüfung wird nicht erreicht. */
+    }
+
+    @Test
+    void whenEditProductInfos_withValidID_returnUpdatedProductAfterEditing() {
+        // Given
+        when(storeRepository.findById("1")).thenReturn(
+                Optional.of(new Product("1","Product1", 600.10))
+        );
+        when(storeRepository.save(new Product("1","Product1", 600.10))).thenReturn(
+                new Product("1","Product1", 600.10)
+        );
+
+        // When
+        Product actual = storeService.editProductInformation("1", new Product("1","Product1", 600.10));
+
+        // Then
+        verify(storeRepository).findById("1");
+        verify(storeRepository).save(new Product("1","Product1", 600.10));
+        Product expected = new Product("1","Product1", 600.10);
+        assertEquals(expected, actual);
+    }
 }
