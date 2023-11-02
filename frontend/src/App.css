@@ -354,7 +354,7 @@ form input{
   align-items:flex-start;
   gap: 10px;
 }
-.editButton{
+.editButton, .deleteButton{
   display: flex;
   justify-content: flex-start;
   align-items:flex-start;
