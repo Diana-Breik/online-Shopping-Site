@@ -155,4 +155,15 @@ class StoreServiceTest {
         Product expected = new Product("1","Product1", 600.10);
         assertEquals(expected, actual);
     }
+
+    @Test
+    void deleteProduct() {
+        // Given
+        String id = "1";
+        // When
+        storeService.deleteProductFromTheStore(id);
+
+        // Then
+        verify(storeRepository).deleteById(id);
+    }
 }
