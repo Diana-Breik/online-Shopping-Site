@@ -34,6 +34,11 @@ public class StoreController {
         return storeService.editProductInformation(id,productAfterEditing);
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteProduct(@PathVariable String id){
+        storeService.deleteProductFromTheStore(id);
+    }
+
     @ExceptionHandler(NoSuchElementException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorMessage handleNoSuchElementException(NoSuchElementException exception){

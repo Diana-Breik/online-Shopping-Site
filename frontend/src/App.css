@@ -354,7 +354,7 @@ form input{
   align-items:flex-start;
   gap: 10px;
 }
-.editButton{
+.editButton, .deleteButton{
   display: flex;
   justify-content: flex-start;
   align-items:flex-start;
@@ -365,4 +365,56 @@ form input{
   width:auto;
   height: auto;
   padding: 8px 14px;
+}
+.confirmation-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Grauer Hintergrund mit Transparenz */
+  display: flex;
+  justify-content: center;/*das Popup ist in der Mitte der Seite (horizontal)*/
+  align-items: center;/*das Popup ist in der Mitte der Seite (vertikal)*/
+  z-index: 9999; /* Z-Index, um sicherzustellen, dass das Popup über allem anderen liegt */
+}
+
+.confirmation-box {
+  background: white;
+  width: 200px;
+  padding: 20px;
+  border: 1px solid #000;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.confirmation-box p {
+  color: #000;
+}
+
+.confirmation-buttons {
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  margin-top: 10px;
+}
+
+.confirm-delete {
+  background-color: #ccc;
+  color: #000;
+  margin: 0 5px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cancel-delete {
+  background-color: #ccc; /* Graue Hintergrundfarbe für "Abbrechen" */
+  color: #000; /* Schwarze Textfarbe */
+  margin: 0 5px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }

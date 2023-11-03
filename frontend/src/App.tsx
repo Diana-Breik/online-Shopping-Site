@@ -50,11 +50,24 @@ function App() {
                 console.error(error);
             });
     }
+
+    function deleteProductCallbackMethod(id : string){
+        axios.delete("/api/products/" + id)
+            .then(response => {
+                if (response.status != 200)
+                    throw new Error("Got wrong status on delete product: " + response.status);
+                loadAllProducts();
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+
     return(
         <>
             <Routes>
                 <Route path={"/"} element={<StartPage/>} />
-                <Route path={"/products"} element={<ProductsGallery products={products} />}/>
+                <Route path={"/products"} element={<ProductsGallery products={products} deleteProductMethod={deleteProductCallbackMethod}/>}/>
                 <Route path={"/products/:id"} element={<ProductDetails products={products}/>}/>
                 <Route path={"/products/add"} element={<AddNewProductPage addNewProductMethod={AddNewProductCallbackMethod}/>}/>
                 <Route path={"/products/:id/edit"} element={<FindProductForEditing products={products} updateMethod={updateProductInfosCallbackMethod} />}/>
