@@ -30,7 +30,7 @@ public class StoreService {
     }
 
     public Product saveNewProduct(NewProduct newProduct) {
-        Product product = new Product(UUID.randomUUID().toString(), newProduct.name(), newProduct.price());
+        Product product = new Product(UUID.randomUUID().toString(), newProduct.name(), newProduct.price(), newProduct.imageUrl());
         return storeRepository.save(product);
     }
 
