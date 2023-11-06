@@ -23,12 +23,18 @@ export default function AddNewProductPage(props: Props) {
     function onImageChange(event: ChangeEvent<HTMLInputElement>) {
         setImage(event.target.value)
     }
+    function openConfirmation() {
+        setWarningMessageToUser(true);
+    }
 
+    function closeConfirmation() {
+        setWarningMessageToUser(false);
+    }
     function saveNewProduct(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
         if (isNaN(Number(Number(enteredPrice.replace(",", ".")).toFixed(2)))) {
-            console.error("This Value is NOT a number");
-            setWarningMessageToUser(true);
+            console.error("This Price is NOT a number");
+            openConfirmation();
             return
         }
 
@@ -40,7 +46,7 @@ export default function AddNewProductPage(props: Props) {
         props.addNewProductMethod(newProductForSave);
         setName("");
         setEnteredPrice("");
-        setWarningMessageToUser(false);
+        closeConfirmation();
         setImage("");
         navigate("/products");
 
@@ -63,8 +69,16 @@ export default function AddNewProductPage(props: Props) {
                         <span className="input-unit">€</span>
                     </div>
                     <br/>
-                    {warningMessageToUser && <p>This Value is NOT a number</p>}
-                    <br/>
+                    {warningMessageToUser && (
+                        <div className="confirmation-popup">
+                            <div className="confirmation-box">
+                                <p>The Price is NOT correct</p>
+                                <div className="confirmation-buttons">
+                                    <button className="showMessage" onClick={closeConfirmation}>Ok</button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
                     <label htmlFor="fld_Image">Product Image :</label><br/><input id="fld_Image" value={image}
                                                                                 required={true} onChange={onImageChange}
                                                                                 placeholder=" Image"/>
