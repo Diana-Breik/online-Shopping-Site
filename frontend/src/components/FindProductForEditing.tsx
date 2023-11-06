@@ -35,6 +35,13 @@ function EditProductInfos(props: EditProps){
         ()=> setProductAfterEdit(props.productForEdit),
         [props.productForEdit]
     );
+    function openConfirmation() {
+        setWarningMessageToUser(true);
+    }
+
+    function closeConfirmation() {
+        setWarningMessageToUser(false);
+    }
     function handleNameChange(event: ChangeEvent<HTMLInputElement>) {
        setProductAfterEdit({...productAfterEdit, name: event.target.value});
     }
@@ -47,14 +54,14 @@ function EditProductInfos(props: EditProps){
     function saveChanges( event: FormEvent<HTMLFormElement> ) {
         event.preventDefault();
         if(isNaN(Number(Number(enteredPrice.replace(",",".")).toFixed(2)))){
-            console.error("This Value is NOT a number");
-            setWarningMessageToUser(true);
+            console.error("This Price is NOT a number");
+            openConfirmation();
             return
         }
         const newProduct= {...productAfterEdit, price: Number(Number(enteredPrice.replace(",",".")).toFixed(2))};
         setProductAfterEdit(newProduct);
         props.updateMethod(newProduct);
-        setWarningMessageToUser(false);
+        closeConfirmation();
         navigate("/products/"+newProduct.id);
     }
 
@@ -72,8 +79,16 @@ function EditProductInfos(props: EditProps){
                         <span className="input-unit">€</span>
                     </div>
                     <br/>
-                    {warningMessageToUser && <p>This Value is NOT a number</p>}
-                    <br/>
+                    {warningMessageToUser && (
+                        <div className="confirmation-popup">
+                            <div className="confirmation-box">
+                                <p>The Price is NOT correct</p>
+                                <div className="confirmation-buttons">
+                                    <button className="okButton" onClick={closeConfirmation}>Ok</button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
                     <label>Product Image    :</label><br/><input value={productAfterEdit.imageUrl} required={true} onChange={handleImageChange} placeholder=" Image"/>
                     <br/>
                 </div>
@@ -82,7 +97,6 @@ function EditProductInfos(props: EditProps){
                     <button className="updateButtonForEditProductPage">Update</button>
                 </div>
             </form>
-
         </div>
     )
 }
