@@ -41,9 +41,9 @@ class StoreIntegrationTest {
     @DirtiesContext
     void whenGetAllProducts_performsOnNonEmptyRepo_ThenReturnsJsonArrayWithAllProducts() throws Exception {
         // Given
-        Product product1= new Product("1","Product1",1000.10);
-        Product product2= new Product("2","Product2",1000.20);
-        Product product3= new Product("3","Product3",1000.30);
+        Product product1= new Product("1","Product1",1000.10, "URL1");
+        Product product2= new Product("2","Product2",1000.20, "URL2");
+        Product product3= new Product("3","Product3",1000.30, "URL3");
         storeRepository.save(product1);
         storeRepository.save(product2);
         storeRepository.save(product3);
@@ -56,9 +56,9 @@ class StoreIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
                    [
-                   {"id": "1","name": "Product1","price":1000.10 },
-                   {"id": "2","name": "Product2","price":1000.20 },
-                   {"id": "3","name": "Product3","price":1000.30 }
+                   {"id": "1","name": "Product1","price":1000.10,"imageUrl": "URL1" },
+                   {"id": "2","name": "Product2","price":1000.20,"imageUrl": "URL2" },
+                   {"id": "3","name": "Product3","price":1000.30,"imageUrl": "URL3" }
                    ]
                   
          """));
@@ -69,7 +69,7 @@ class StoreIntegrationTest {
     void getProductDetailsByID_ifFound() throws Exception {
         //GIVEN
         String id= "1";
-        Product product = new Product(id,"Product1",1000.10);
+        Product product = new Product(id,"Product1",1000.10, "URL1");
         storeRepository.save(product);
 
         //WHEN
@@ -79,7 +79,7 @@ class StoreIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
 					{
-					"id": "1","name": "Product1","price":1000.10
+					"id": "1","name": "Product1","price":1000.10,"imageUrl": "URL1"
 					}
 				"""));
     }
@@ -108,7 +108,8 @@ class StoreIntegrationTest {
                         .content("""
 							{
 							"name": "Product1",
-							"price":1000.10
+							"price":1000.10,
+							"imageUrl": "URL1"
 							}
 						""")
                 )
@@ -118,7 +119,8 @@ class StoreIntegrationTest {
                 .andExpect(content().json("""
 					        {
 							"name": "Product1",
-							"price":1000.10
+							"price":1000.10,
+							"imageUrl": "URL1"
 							}
 				"""))
                 .andExpect(jsonPath("$.id").isString());
@@ -127,15 +129,15 @@ class StoreIntegrationTest {
     @DirtiesContext
     void whenEditProductInfos_withDifferentIDs_returnBadRequest() throws Exception {
         // Given
-        storeRepository.save(new Product("1","Product1",1000.10));
-        storeRepository.save(new Product("2","Product2",1000.10));
+        storeRepository.save(new Product("1","Product1",1000.10, "URL1"));
+        storeRepository.save(new Product("2","Product2",1000.10, "URL2"));
         // When
         mockMvc
                 .perform(MockMvcRequestBuilders
                         .put("/api/products/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
-							{"id": "2","name": "Product1","price":1000.20}
+							{"id": "2","name": "Product1","price":1000.20,"imageUrl": "URL1"}
 						""")
                 )
 
@@ -146,15 +148,15 @@ class StoreIntegrationTest {
     @DirtiesContext
     void whenEditProductInfos_withNonExistentID_returnNotFound() throws Exception {
         // Given
-        storeRepository.save(new Product("1","Product1",1000.10));
-        storeRepository.save(new Product("2","Product2",1000.10));
+        storeRepository.save(new Product("1","Product1",1000.10, "URL1"));
+        storeRepository.save(new Product("2","Product2",1000.10, "URL2"));
         // When
         mockMvc
                 .perform(MockMvcRequestBuilders
                         .put("/api/products/5")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
-							{"id": "5","name": "Product5","price":1000.50}
+							{"id": "5","name": "Product5","price":1000.50,"imageUrl": "URL5"}
 						""")
                 )
 
@@ -166,24 +168,24 @@ class StoreIntegrationTest {
     @DirtiesContext
     void whenEditProductInfos_withValidID_returnUpdatedProductAfterEditing() throws Exception {
         // Given
-        storeRepository.save(new Product("1","Product1",1000.10));
-        storeRepository.save(new Product("2","Product2",1000.20));
-        storeRepository.save(new Product("3","Product3",1000.30));
-        storeRepository.save(new Product("4","Product4",1000.40));
+        storeRepository.save(new Product("1","Product1",1000.10, "URL1"));
+        storeRepository.save(new Product("2","Product2",1000.20, "URL2"));
+        storeRepository.save(new Product("3","Product3",1000.30, "URL3"));
+        storeRepository.save(new Product("4","Product4",1000.40, "URL4"));
         // When
         mockMvc
                 .perform(MockMvcRequestBuilders
                         .put("/api/products/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
-							{"id": "1","name": "Product1","price":1000.99}
+							{"id": "1","name": "Product1","price":1000.99,"imageUrl": "URL1"}
 						""")
                 )
 
                 // Then
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
-					{"id": "1","name": "Product1","price":1000.99}
+					{"id": "1","name": "Product1","price":1000.99,"imageUrl": "URL1"}
 				"""));
     }
 
@@ -191,7 +193,7 @@ class StoreIntegrationTest {
     @DirtiesContext
     void deleteProduct() throws Exception {
         // Given
-        storeRepository.save(new Product("1","Product1",1000.10));
+        storeRepository.save(new Product("1","Product1",1000.10, "URL1"));
 
         // When
         mockMvc.perform(MockMvcRequestBuilders.delete("/api/products/1"))
