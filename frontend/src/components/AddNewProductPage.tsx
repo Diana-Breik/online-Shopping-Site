@@ -74,7 +74,7 @@ export default function AddNewProductPage(props: Props) {
                             <div className="confirmation-box">
                                 <p>The Price is NOT correct</p>
                                 <div className="confirmation-buttons">
-                                    <button className="showMessage" onClick={closeConfirmation}>Ok</button>
+                                    <button className="okButton" onClick={closeConfirmation}>Ok</button>
                                 </div>
                             </div>
                         </div>

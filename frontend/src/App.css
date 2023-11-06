@@ -409,7 +409,7 @@ form input{
   cursor: pointer;
 }
 
-.cancel-delete {
+.cancel-delete, .okButton {
   background-color: #ccc; /* Graue Hintergrundfarbe für "Abbrechen" */
   color: #000; /* Schwarze Textfarbe */
   margin: 0 5px;
