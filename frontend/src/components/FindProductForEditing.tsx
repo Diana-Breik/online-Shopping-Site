@@ -38,9 +38,11 @@ function EditProductInfos(props: EditProps){
     function handleNameChange(event: ChangeEvent<HTMLInputElement>) {
        setProductAfterEdit({...productAfterEdit, name: event.target.value});
     }
-
     function handlePriceChange(event: ChangeEvent<HTMLInputElement>) {
         setEnteredPrice(event.target.value);
+    }
+    function handleImageChange(event: ChangeEvent<HTMLInputElement>) {
+        setProductAfterEdit({...productAfterEdit, imageUrl: event.target.value});
     }
     function saveChanges( event: FormEvent<HTMLFormElement> ) {
         event.preventDefault();
@@ -71,6 +73,8 @@ function EditProductInfos(props: EditProps){
                     </div>
                     <br/>
                     {warningMessageToUser && <p>This Value is NOT a number</p>}
+                    <br/>
+                    <label>Product Image    :</label><br/><input value={productAfterEdit.imageUrl} required={true} onChange={handleImageChange} placeholder=" Image"/>
                     <br/>
                 </div>
                 <div className="editProductPageButtons">
