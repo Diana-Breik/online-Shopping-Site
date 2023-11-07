@@ -13,4 +13,4 @@ export type NewProduct = {
     description:string
     category: ProductCategory
 }
-export type ProductCategory = "LAPTOPS" | "SMARTPHONES" | "SMARTWATCHES"
+export type ProductCategory = "LAPTOPS" | "SMARTPHONES" | "SMARTWATCHES" | "UNKNOWN" | "OTHER"

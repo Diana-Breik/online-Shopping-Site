@@ -119,7 +119,7 @@ class StoreServiceTest {
         String idInTheBodyOfTheModifiedProduct = "2";
 
         // When
-        Executable executable = () -> storeService.editProductInformation(idInPath, new Product(idInTheBodyOfTheModifiedProduct, "Product1", 600.10, "URL1","Description1", ProductCategory.LAPTOPS));
+        Executable executable = () -> storeService.editProductInformation(idInPath, new Product(idInTheBodyOfTheModifiedProduct, "Product1", 600.10, "URL1","Description1", ProductCategory.UNKNOWN));
 
         // Then
         assertThrows(IllegalArgumentException.class, executable);
@@ -130,7 +130,7 @@ class StoreServiceTest {
         when(storeRepository.findById("5")).thenReturn(Optional.empty());
 
         // When
-        Executable executable = () -> storeService.editProductInformation("5", new Product("5","Product5", 600.10, "URL5","Description5", ProductCategory.SMARTPHONES));
+        Executable executable = () -> storeService.editProductInformation("5", new Product("5","Product5", 600.10, "URL5","Description5", ProductCategory.OTHER));
 
         // Then
         assertThrows(NoSuchElementException.class, executable);
