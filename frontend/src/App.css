@@ -309,7 +309,7 @@ form input{
   height: 90%;
   width: 200px;
 }
-.addProductForm input, .editProductForm input{
+.addProductForm input, .editProductForm input, .addProductForm select{
   margin-top: 4px;
   margin-bottom: 18px;
   background-color: gainsboro;
