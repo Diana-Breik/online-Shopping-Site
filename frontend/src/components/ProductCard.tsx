@@ -1,7 +1,6 @@
 import {Product} from "../Types.ts";
 import '../App.css'
 import {Link, useNavigate} from "react-router-dom";
-import pictureForCard from '/hintergrund.jpg'
 import {useState} from "react";
 
 type Props = {
@@ -37,7 +36,7 @@ export default function ProductCard(props: Props) {
     return (
         <div className="productCard">
             <Link to={`/products/${props.product.id}`}>
-                <img className="productFoto" src={pictureForCard} alt=""/>
+                <img className="productFoto" src={props.product.imageUrl} alt="Product Image"/>
             </Link>
             <div className="listButtons">
                 <button className="editButton" type={"button"} onClick={navigateWhenClickEdit}>

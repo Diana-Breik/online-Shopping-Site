@@ -21,7 +21,7 @@ export default function ProductDetails(props : Props){
                 filteredProduct
                 ? <>
                     <div className="productImage">
-                    <img src={"https://images.unsplash.com/photo-1522252234503-e356532cafd5?auto=format&fit=crop&q=80&w=2650&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"} alt="Product image"/>
+                    <img src={filteredProduct.imageUrl} alt="Product Image"/>
                     </div>
                     <div className="productText">
                     <h3>{filteredProduct.price}€</h3><br/>

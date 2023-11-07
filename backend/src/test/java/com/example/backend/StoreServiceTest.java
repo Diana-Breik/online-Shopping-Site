@@ -45,9 +45,9 @@ class StoreServiceTest {
     void whenGetAllProducts_callsNonEmptyRepo_ThenReturnListOfProducts() {
         // Given
         when(storeRepository.findAll()).thenReturn(List.of(
-                new Product("1", "Product1", 600.10),
-                new Product("2", "Product2", 600.20),
-                new Product("3", "Product3", 600.30)
+                new Product("1", "Product1", 600.10, "URL1"),
+                new Product("2", "Product2", 600.20, "URL2"),
+                new Product("3", "Product3", 600.30, "URL3")
         ));
 
         // When
@@ -57,9 +57,9 @@ class StoreServiceTest {
         verify(storeRepository).findAll();
 
         List<Product> expected = List.of(
-                new Product("1", "Product1", 600.10),
-                new Product("2", "Product2", 600.20),
-                new Product("3", "Product3", 600.30)
+                new Product("1", "Product1", 600.10, "URL1"),
+                new Product("2", "Product2", 600.20, "URL2"),
+                new Product("3", "Product3", 600.30, "URL3")
                 );
         assertEquals(expected, actual);
     }
@@ -68,7 +68,7 @@ class StoreServiceTest {
     void findProductById_WhenIdExist() {
         //GIVEN
         String id = "1";
-        Product product1 = new Product("1", "Product1", 600.10);
+        Product product1 = new Product("1", "Product1", 600.10, "URL1");
 
         when(storeRepository.findById(id)).thenReturn(Optional.of(product1));
 
@@ -76,7 +76,7 @@ class StoreServiceTest {
         Product actual = storeService.getProductDetailsByID(id);
 
         //THEN
-        Product expected = new Product("1", "Product1", 600.10);
+        Product expected = new Product("1", "Product1", 600.10, "URL1");
         verify(storeRepository).findById(id);
         assertEquals(expected,actual);
     }
@@ -99,16 +99,16 @@ class StoreServiceTest {
 
       when(storeRepository.save(productArgumentCaptor.capture())).thenAnswer(invocationOnMock -> {
           Product savedProduct = invocationOnMock.getArgument(0);
-          savedProduct = new Product("1",savedProduct.name(),savedProduct.price());
+          savedProduct = new Product("1",savedProduct.name(),savedProduct.price(),savedProduct.imageUrl());
           return savedProduct;
               });
 
       //WHEN
-      Product actual = storeService.saveNewProduct(new NewProduct("Product1", 600.10));
+      Product actual = storeService.saveNewProduct(new NewProduct("Product1", 600.10, "URL1"));
 
       //THEN
       verify(storeRepository).save(productArgumentCaptor.getValue());
-      Product expected = new Product("1", "Product1", 600.10);
+      Product expected = new Product("1", "Product1", 600.10, "URL1");
       assertEquals(expected, actual);
   }
     @Test
@@ -118,7 +118,7 @@ class StoreServiceTest {
         String idInTheBodyOfTheModifiedProduct = "2";
 
         // When
-        Executable executable = () -> storeService.editProductInformation(idInPath, new Product(idInTheBodyOfTheModifiedProduct, "Product1", 600.10));
+        Executable executable = () -> storeService.editProductInformation(idInPath, new Product(idInTheBodyOfTheModifiedProduct, "Product1", 600.10, "URL1"));
 
         // Then
         assertThrows(IllegalArgumentException.class, executable);
@@ -129,7 +129,7 @@ class StoreServiceTest {
         when(storeRepository.findById("5")).thenReturn(Optional.empty());
 
         // When
-        Executable executable = () -> storeService.editProductInformation("5", new Product("5","Product5", 600.10));
+        Executable executable = () -> storeService.editProductInformation("5", new Product("5","Product5", 600.10, "URL5"));
 
         // Then
         assertThrows(NoSuchElementException.class, executable);
@@ -140,19 +140,19 @@ class StoreServiceTest {
     void whenEditProductInfos_withValidID_returnUpdatedProductAfterEditing() {
         // Given
         when(storeRepository.findById("1")).thenReturn(
-                Optional.of(new Product("1","Product1", 600.10))
+                Optional.of(new Product("1","Product1", 600.10, "URL1"))
         );
-        when(storeRepository.save(new Product("1","Product1", 600.10))).thenReturn(
-                new Product("1","Product1", 600.10)
+        when(storeRepository.save(new Product("1","Product1", 600.10, "URL1"))).thenReturn(
+                new Product("1","Product1", 600.10, "URL1")
         );
 
         // When
-        Product actual = storeService.editProductInformation("1", new Product("1","Product1", 600.10));
+        Product actual = storeService.editProductInformation("1", new Product("1","Product1", 600.10, "URL1"));
 
         // Then
         verify(storeRepository).findById("1");
-        verify(storeRepository).save(new Product("1","Product1", 600.10));
-        Product expected = new Product("1","Product1", 600.10);
+        verify(storeRepository).save(new Product("1","Product1", 600.10, "URL1"));
+        Product expected = new Product("1","Product1", 600.10, "URL1");
         assertEquals(expected, actual);
     }
 
