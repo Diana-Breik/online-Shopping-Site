@@ -7,6 +7,10 @@ public record Product(
 
         double price,
 
-        String imageUrl
+        String imageUrl,
+
+        String description,
+
+        ProductCategory category
 ) {
 }
