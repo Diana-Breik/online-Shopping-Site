@@ -25,7 +25,8 @@ export default function ProductDetails(props : Props){
                     </div>
                     <div className="productText">
                     <h3>{filteredProduct.price}€</h3><br/>
-                        <p>{filteredProduct.name}</p>
+                        <p>{filteredProduct.name}</p><br/>
+                        <p>{filteredProduct.description}</p>
                     </div>
                 </>
                 : <div className="showMessage">
