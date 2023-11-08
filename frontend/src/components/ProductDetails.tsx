@@ -1,10 +1,11 @@
 import {useParams} from "react-router-dom";
-import {Product} from "../Types.ts";
+import {Product, ProductCategory} from "../Types.ts";
 import Navbar from "./Navbar.tsx";
 import '../App.css'
 
 type Props = {
     products: Product[]
+    findProductsByCategory:(category : ProductCategory)=> void
 }
 export default function ProductDetails(props : Props){
 
@@ -14,7 +15,7 @@ export default function ProductDetails(props : Props){
     return(
         <div className="parentContainer">
             <div className="topBar">
-                <Navbar />
+                <Navbar findProductsByCategory={props.findProductsByCategory}/>
             </div>
             <div className="productDetails">
             {
