@@ -92,8 +92,44 @@ class StoreServiceTest {
         //THEN
         assertThrows(NoSuchElementException.class, ()->storeService.getProductDetailsByID(id));
     }
+    @Test
+    void whenGetAllProductsFromThisCategory_AndNoProductsInThisCategory_ThenReturnEmptyList() {
+        // Given
+        ProductCategory category = ProductCategory.LAPTOPS;
+        when(storeRepository.findAllByCategory(category)).thenReturn(List.of());
 
-  @Test
+        // When
+        List<Product> actual = storeService.getAllProductsFromThisCategory(category);
+
+        // Then
+        verify(storeRepository).findAllByCategory(category);
+
+        List<Product> expected = List.of();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void whenGetAllProductsFromThisCategory_AndThereAreProductsInThisCategory_ThenReturnListOfTheseProducts() {
+        // Given
+        ProductCategory category = ProductCategory.SMARTPHONES;
+        when(storeRepository.findAllByCategory(category)).thenReturn(List.of(
+                new Product("2", "Product2", 600.20, "URL2","Description2", ProductCategory.SMARTPHONES)
+        ));
+
+        // When
+        List<Product> actual = storeService.getAllProductsFromThisCategory(category);
+
+        // Then
+        verify(storeRepository).findAllByCategory(category);
+
+        List<Product> expected = List.of(
+                new Product("2", "Product2", 600.20, "URL2","Description2", ProductCategory.SMARTPHONES)
+        );
+        assertEquals(expected, actual);
+    }
+
+
+    @Test
   void addNewProduct() {
       //GIVEN
       ArgumentCaptor<Product> productArgumentCaptor = ArgumentCaptor.forClass(Product.class);
