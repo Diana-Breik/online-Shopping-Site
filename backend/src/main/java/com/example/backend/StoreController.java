@@ -2,6 +2,7 @@ package com.example.backend;
 
 import com.example.backend.models.NewProduct;
 import com.example.backend.models.Product;
+import com.example.backend.models.ProductCategory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,11 @@ public class StoreController {
     @GetMapping("/{id}")
     public Product getProductDetailsByID(@PathVariable String id){
         return storeService.getProductDetailsByID(id);
+    }
+
+    @GetMapping("/{category}")
+    public List<Product> getAllProductsFromThisCategory(@PathVariable ProductCategory category){
+        return storeService.getAllProductsFromThisCategory(category);
     }
 
     @PostMapping
