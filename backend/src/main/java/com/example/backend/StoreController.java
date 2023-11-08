@@ -26,7 +26,7 @@ public class StoreController {
         return storeService.getProductDetailsByID(id);
     }
 
-    @GetMapping("/{category}")
+    @GetMapping("/filter/{category}")
     public List<Product> getAllProductsFromThisCategory(@PathVariable ProductCategory category){
         return storeService.getAllProductsFromThisCategory(category);
     }
