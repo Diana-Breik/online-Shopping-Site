@@ -1,8 +1,8 @@
 import {useEffect, useState} from 'react'
 import './App.css'
 import axios from "axios";
-import {NewProduct, Product} from "./Types.ts";
-import {Route, Routes} from "react-router-dom";
+import {NewProduct, Product, ProductCategory} from "./Types.ts";
+import {Route, Routes, useNavigate} from "react-router-dom";
 import ProductsGallery from "./components/ProductsGallery.tsx";
 import StartPage from "./components/StartPage.tsx";
 import ProductDetails from "./components/ProductDetails.tsx";
@@ -12,8 +12,9 @@ import FindProductForEditing from "./components/FindProductForEditing.tsx";
 function App() {
 
     const [products, setProducts] = useState<Product[]>([]);
+    const [productsByCategory, setProductsByCategory] = useState<Product[]>([]);
     useEffect(loadAllProducts,[]);
-
+    const navigate = useNavigate();
     function loadAllProducts (){
         axios.get("/api/products")
             .then((response) => {
@@ -62,15 +63,27 @@ function App() {
                 console.error(error);
             });
     }
-
+    function findSpecificGroupOfProductsCallbackMethod(category : ProductCategory){
+        axios.get("/api/products/filter/" + category)
+            .then((response) => {
+                if (response.status!==200)
+                    throw new Error("Get wrong response status, when loading all products: "+response.status);
+                setProductsByCategory(response.data);
+            })
+            .catch((error)=>{
+                console.error(error);
+            })
+        navigate("/products/filter/" + category);
+    }
     return(
         <>
             <Routes>
-                <Route path={"/"} element={<StartPage/>} />
-                <Route path={"/products"} element={<ProductsGallery products={products} deleteProductMethod={deleteProductCallbackMethod}/>}/>
-                <Route path={"/products/:id"} element={<ProductDetails products={products}/>}/>
+                <Route path={"/"} element={<StartPage findProductsByCategory={findSpecificGroupOfProductsCallbackMethod}/>} />
+                <Route path={"/products"} element={<ProductsGallery products={products} deleteProductMethod={deleteProductCallbackMethod} findProductsByCategory={findSpecificGroupOfProductsCallbackMethod}/>}/>
+                <Route path={"/products/:id"} element={<ProductDetails products={products} findProductsByCategory={findSpecificGroupOfProductsCallbackMethod}/>}/>
                 <Route path={"/products/add"} element={<AddNewProductPage addNewProductMethod={AddNewProductCallbackMethod}/>}/>
                 <Route path={"/products/:id/edit"} element={<FindProductForEditing products={products} updateMethod={updateProductInfosCallbackMethod} />}/>
+                <Route path={"/products/filter/:category"} element={<ProductsGallery products={productsByCategory} deleteProductMethod={deleteProductCallbackMethod} findProductsByCategory={findSpecificGroupOfProductsCallbackMethod}/>}/>
             </Routes>
 
 
