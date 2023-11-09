@@ -78,9 +78,9 @@ function App() {
     return(
         <>
             <Routes>
-                <Route path={"/"} element={<StartPage findProductsByCategory={findSpecificGroupOfProductsCallbackMethod}/>} />
+                <Route path={"/"} element={<StartPage/>} />
                 <Route path={"/products"} element={<ProductsGallery products={products} deleteProductMethod={deleteProductCallbackMethod} findProductsByCategory={findSpecificGroupOfProductsCallbackMethod}/>}/>
-                <Route path={"/products/:id"} element={<ProductDetails products={products} findProductsByCategory={findSpecificGroupOfProductsCallbackMethod}/>}/>
+                <Route path={"/products/:id"} element={<ProductDetails products={products}/>}/>
                 <Route path={"/products/add"} element={<AddNewProductPage addNewProductMethod={AddNewProductCallbackMethod}/>}/>
                 <Route path={"/products/:id/edit"} element={<FindProductForEditing products={products} updateMethod={updateProductInfosCallbackMethod} />}/>
                 <Route path={"/products/filter/:category"} element={<ProductsGallery products={productsByCategory} deleteProductMethod={deleteProductCallbackMethod} findProductsByCategory={findSpecificGroupOfProductsCallbackMethod}/>}/>

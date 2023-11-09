@@ -1,16 +1,13 @@
 import '../App.css'
 import Image from "../images/HellerHintergrund.jpg";
 import Navbar from "./Navbar.tsx";
-import {ProductCategory} from "../Types.ts";
-type Props = {
-    findProductsByCategory:(category : ProductCategory)=> void
-}
-export default function StartPage(props : Props){
+
+export default function StartPage(){
 
     return (
             <div className="startPage" style={{backgroundImage:`url(${Image})`}}>
                 <div className="topBar">
-                    <Navbar findProductsByCategory={props.findProductsByCategory} />
+                    <Navbar/>
                 </div>
                     <div className="content">
                         <h1>TechWorld</h1>
