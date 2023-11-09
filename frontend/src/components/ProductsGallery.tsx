@@ -2,25 +2,27 @@ import {Product, ProductCategory} from "../Types.ts";
 import ProductCard from "./ProductCard.tsx";
 import Navbar from "./Navbar.tsx";
 import '../App.css'
-import {useNavigate} from "react-router-dom";
+import {useState} from "react";
 
 type Props = {
     products: Product[]
     deleteProductMethod: (id : string)=> void
-    findProductsByCategory:(category : ProductCategory)=> void
 }
 export default function ProductsGallery(props: Props){
-
-    const navigate = useNavigate();
-    function navigateWhenClickAllProducts(option: string){
+    const [optionValue, setOptionValue] = useState<string>("");
+    const [productsByCategory, setProductsByCategory] = useState<Product[]>([]);
+    function findProductsByCategory(option: string){
+        setOptionValue(option);
         if(option==="ALL")
-            navigate("/products");
-        else if(option==="LAPTOPS")
-            props.findProductsByCategory("LAPTOPS")
-        else if(option==="SMARTPHONES")
-            props.findProductsByCategory("SMARTPHONES")
+        {
+           setProductsByCategory(props.products);
+        }
         else
-            props.findProductsByCategory("SMARTWATCHES")
+        {
+            const category= (option as ProductCategory);
+            const filteredProducts = props.products.filter(product => product.category === category);
+            setProductsByCategory(filteredProducts);
+        }
 
     }
     return (
@@ -28,7 +30,7 @@ export default function ProductsGallery(props: Props){
              <div className="topBar">
                 <Navbar />
              </div>
-               <select className="filterProductsInGallery" onChange={e =>navigateWhenClickAllProducts (e.target.value)}>
+               <select value={optionValue} className="filterProductsInGallery" onChange={e =>findProductsByCategory (e.target.value)}>
                    <option  value="ALL" className= "navText">All Products</option>
                    <option  value="LAPTOPS" className= "navText">Laptops</option>
                    <option  value="SMARTPHONES" className= "navText">Smartphones</option>
@@ -36,9 +38,16 @@ export default function ProductsGallery(props: Props){
                </select>
              <div className="productsGallery">
                 {
+                    optionValue ==="" ? (
                     props.products.map( product =>
                         <ProductCard key={product.id} product={product} deleteProductMethod={props.deleteProductMethod}/>
                     )
+                    ):(
+                        productsByCategory.map(product =>
+                            <ProductCard key={product.id} product={product} deleteProductMethod={props.deleteProductMethod}/>
+                        )
+                    )
+
                 }
              </div>
            </div>
