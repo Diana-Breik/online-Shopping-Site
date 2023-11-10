@@ -14,7 +14,7 @@ export default function ProductDetails(props : Props){
     return(
         <div className="parentContainer">
             <div className="topBar">
-                <Navbar />
+                <Navbar/>
             </div>
             <div className="productDetails">
             {

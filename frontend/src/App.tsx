@@ -13,7 +13,6 @@ function App() {
 
     const [products, setProducts] = useState<Product[]>([]);
     useEffect(loadAllProducts,[]);
-
     function loadAllProducts (){
         axios.get("/api/products")
             .then((response) => {
@@ -62,7 +61,6 @@ function App() {
                 console.error(error);
             });
     }
-
     return(
         <>
             <Routes>

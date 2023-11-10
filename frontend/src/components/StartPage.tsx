@@ -1,12 +1,13 @@
 import '../App.css'
 import Image from "../images/HellerHintergrund.jpg";
 import Navbar from "./Navbar.tsx";
+
 export default function StartPage(){
 
     return (
             <div className="startPage" style={{backgroundImage:`url(${Image})`}}>
                 <div className="topBar">
-                    <Navbar />
+                    <Navbar/>
                 </div>
                     <div className="content">
                         <h1>TechWorld</h1>

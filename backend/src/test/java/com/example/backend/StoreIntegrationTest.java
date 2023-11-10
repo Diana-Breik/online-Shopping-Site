@@ -64,6 +64,46 @@ class StoreIntegrationTest {
                   
          """));
     }
+    @Test
+    @DirtiesContext
+    void whenGetAllProductsFromThisCategory_AndNoProductsInThisCategory_ThenReturnsEmptyJsonArray() throws Exception {
+        // Given
+        ProductCategory category = ProductCategory.LAPTOPS;
+        // When
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get("/api/products/filter/"+category)
+                )
+
+                // Then
+                .andExpect(status().isOk())
+                .andExpect(content().json("[]"));
+    }
+    @Test
+    @DirtiesContext
+    void whenGetAllProductsFromThisCategory_AndThereAreProductsInThisCategory_ThenReturnsJsonArrayWithTheseProducts() throws Exception {
+        // Given
+        ProductCategory category = ProductCategory.LAPTOPS;
+        Product product1= new Product("1","Product1",1000.10, "URL1","Description1", ProductCategory.LAPTOPS);
+        Product product2= new Product("2","Product2",1000.20, "URL2","Description2", ProductCategory.LAPTOPS);
+        Product product3= new Product("3","Product3",1000.30, "URL3","Description3", ProductCategory.SMARTPHONES);
+        storeRepository.save(product1);
+        storeRepository.save(product2);
+        storeRepository.save(product3);
+        // When
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get("/api/products/filter/"+category)
+                )
+
+                // Then
+                .andExpect(status().isOk())
+                .andExpect(content().json("""
+                   [
+                   {"id": "1","name": "Product1","price":1000.10,"imageUrl": "URL1","description": "Description1","category": "LAPTOPS" },
+                   {"id": "2","name": "Product2","price":1000.20,"imageUrl": "URL2","description": "Description2","category": "LAPTOPS"  }
+                   ]
+                  
+         """));
+    }
 
     @Test
     @DirtiesContext

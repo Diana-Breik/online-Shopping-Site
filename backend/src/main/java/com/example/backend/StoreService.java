@@ -2,6 +2,7 @@ package com.example.backend;
 
 import com.example.backend.models.NewProduct;
 import com.example.backend.models.Product;
+import com.example.backend.models.ProductCategory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,16 +22,20 @@ public class StoreService {
     }
 
     public Product getProductDetailsByID(String id) {
-        Optional<Product> optionalProduct =  storeRepository.findById(id);
-        if(optionalProduct.isPresent()){
+        Optional<Product> optionalProduct = storeRepository.findById(id);
+        if (optionalProduct.isPresent()) {
             return optionalProduct.get();
-        }else {
+        } else {
             throw new NoSuchElementException("This product does not exist");
         }
     }
 
+    public List<Product> getAllProductsFromThisCategory(ProductCategory category) {
+        return storeRepository.findAllByCategory(category);
+    }
+
     public Product saveNewProduct(NewProduct newProduct) {
-        Product product = new Product(UUID.randomUUID().toString(), newProduct.name(), newProduct.price(), newProduct.imageUrl(),newProduct.description(),newProduct.category());
+        Product product = new Product(UUID.randomUUID().toString(), newProduct.name(), newProduct.price(), newProduct.imageUrl(), newProduct.description(), newProduct.category());
         return storeRepository.save(product);
     }
 
@@ -48,4 +53,6 @@ public class StoreService {
     public void deleteProductFromTheStore(String id) {
         storeRepository.deleteById(id);
     }
+
+
 }
