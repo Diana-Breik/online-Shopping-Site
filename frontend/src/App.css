@@ -176,7 +176,7 @@
   }
 }
 .filterProductsInGallery{
-  margin-top: 92px;
+  margin-top: 96px;
   margin-left: 20px;
   display: flex;
   flex-wrap: wrap;
@@ -274,17 +274,22 @@
   margin-top: 60px;
 }
 .productText {
-  text-align: center;/* später mit der Einkaufsliste & Favoritliste soll das auf (left) gesetzt werden*/
-  padding: 20px;
+  text-align: left;/* später mit der Einkaufsliste & Favoritliste soll das auf (left) gesetzt werden*/
+  padding: 8px;
 }
 .productText h3 {
-  font-size: 25px;
+  margin-top: 5px;
+  font-size: 22px;
   /*margin-top: 10px;*/
 }
 
 .productText p {
-  font-size: 20px;
+  font-size: 19px;
+  margin-top: -8px;
  /* margin-top: 5px;*/
+}
+.titleInTheDetails{
+  font-size: 23px;
 }
 .showMessage p{
   display: flex;

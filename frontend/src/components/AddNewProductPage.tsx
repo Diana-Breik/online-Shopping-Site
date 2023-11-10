@@ -76,13 +76,13 @@ export default function AddNewProductPage(props: Props) {
             <h3 className="titleAddProduct">Add a new Product to the store:</h3><br/>
             <form onSubmit={saveNewProduct}>
                 <div className="addProductForm">
-                    <label htmlFor="fld_Name">Product Name :</label><br/><input id="fld_Name" value={name}
+                    <label htmlFor="fld_name">Product Name :</label><br/><input id="fld_name" value={name}
                                                                                 required={true} onChange={onNameChange}
                                                                                 placeholder=" Name"/>
                     <br/>
-                    <label htmlFor="feld_Price">Product Price :</label><br/>
+                    <label htmlFor="feld_price">Product Price :</label><br/>
                     <div className="input-container">
-                        <input id="feld_Price" value={enteredPrice} required={true} onChange={onPriceChange}
+                        <input id="feld_price" value={enteredPrice} required={true} onChange={onPriceChange}
                                placeholder=" Price"/>
                         <span className="input-unit">€</span>
                     </div>
@@ -97,12 +97,12 @@ export default function AddNewProductPage(props: Props) {
                             </div>
                         </div>
                     )}
-                    <label htmlFor="fld_Image">Product Image :</label><br/><input id="fld_Image" value={image}
+                    <label htmlFor="fld_image">Product Image :</label><br/><input id="fld_image" value={image}
                                                                                   required={true}
                                                                                   onChange={onImageChange}
                                                                                   placeholder=" Image"/>
                     <br/>
-                    <label htmlFor="fld_Description">Product Description :</label><br/><input id="fld_Description"
+                    <label htmlFor="fld_description">Product Description :</label><br/><input id="fld_description"
                                                                                               value={description}
                                                                                               required={true}
                                                                                               onChange={onDescriptionChange}
